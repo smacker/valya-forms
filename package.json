@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "Wrapper for valya to make forms easier",
   "main": "index.js",
+  "keywords": ["react", "validation", "validator"],
+  "homepage": "https://github.com/smacker/valya-forms",
   "scripts": {
     "build": "babel src/index.js > index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
