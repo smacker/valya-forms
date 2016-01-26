@@ -1,0 +1,34 @@
+extends: "eslint:recommended"
+
+parser: babel-eslint
+plugins:
+  - babel
+
+env:
+  es6: true
+  node: true
+  browser: true
+
+ecmaFeatures:
+  modules: true
+
+rules:
+  semi:
+    - 2
+    - always
+
+  array-bracket-spacing:
+    - 2
+    - always
+    - singleValue: true
+      objectsInArrays: true
+      arraysInArrays: true
+
+  block-spacing:
+    - 2
+    - always
+
+  indent:
+    - 2
+    - 4
+    - SwitchCase: 1
