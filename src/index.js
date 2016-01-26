@@ -10,19 +10,13 @@ export const ValidatorWrapper = (Base) => {
         };
 
         _onStart = () => {
-            if (!this.context.onStart) {
-                return;
-            }
-
-            this.context.onStart(this.props.name);
+            this.props.onStart && this.props.onStart();
+            this.context.onStart && this.context.onStart(this.props.name);
         };
 
         _onEnd = (isValid, message) => {
-            if (!this.context.onEnd) {
-                return;
-            }
-
-            this.context.onEnd(isValid, message, this.props.name);
+            this.props.onEnd && this.props.onEnd(isValid, message);
+            this.context.onEnd && this.context.onEnd(isValid, message, this.props.name);
         };
 
         render() {
@@ -31,9 +25,9 @@ export const ValidatorWrapper = (Base) => {
             return createElement(Base, {
                 initialValidation,
                 silentInitValidation,
+                ...this.props,
                 onStart: this._onStart,
-                onEnd: this._onEnd,
-                ...this.props
+                onEnd: this._onEnd
             }, this.props.children);
         }
     };

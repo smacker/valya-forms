@@ -5,14 +5,15 @@ import { ValidatorWrapper } from '../src/index';
 
 let output, instance;
 
-function makeValidator(context) {
+function makeValidator(context, props) {
     const component = () => null;
     const wrappedComponent = ValidatorWrapper(component);
 
     ({ output, instance } = renderOnce({
         component: wrappedComponent,
         props: {
-            name: 'test'
+            name: 'test',
+            ...props
         },
         context
     }));
@@ -73,4 +74,36 @@ test('should call onEnd from context', (t) => {
     makeValidator({onEnd: callback});
 
     output.props.onEnd();
+});
+
+test('should call onStart from props and context', (t) => {
+    t.plan(2);
+
+    function contextCallback() {
+        t.pass('props callback called');
+    }
+
+    function propsCallback() {
+        t.pass('props callback called');
+    }
+
+    makeValidator({onStart: contextCallback}, {onStart: propsCallback});
+
+    output.props.onStart();
+});
+
+test('should call onEnd from props and context', (t) => {
+    t.plan(2);
+
+    function contextCallback() {
+        t.pass('props callback called');
+    }
+
+    function propsCallback() {
+        t.pass('props callback called');
+    }
+
+    makeValidator({onStart: contextCallback}, {onStart: propsCallback});
+
+    output.props.onStart();
 });
