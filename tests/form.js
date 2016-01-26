@@ -73,7 +73,7 @@ test('state change after onStart', (t) => {
     t.end();
 });
 
-test('state change after onEnd', (t) => {
+test('state change after valid onEnd', (t) => {
     makeForm();
 
     const isValid = true;
@@ -101,6 +101,22 @@ test('state change after not valid onEnd', (t) => {
 
     t.deepEqual(instance.state, {
         isValid: false,
+        isValidating: false
+    });
+
+    t.end();
+});
+
+test('should finish validation when onEnd called more times then onStart', (t) => {
+    makeForm();
+
+    const isValid = true;
+    const message = null;
+
+    childContext.onEnd(isValid, message, fieldName);
+
+    t.deepEqual(instance.state, {
+        isValid: true,
         isValidating: false
     });
 

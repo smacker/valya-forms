@@ -72,6 +72,10 @@ export const FormWrapper = (Base) => {
                     this.fieldsInValidating -= 1;
                     this.fields[name] = isValid;
 
+                    if (this.fieldsInValidating < 0) {
+                        this.fieldsInValidating = 0;
+                    }
+
                     if (this.fieldsInValidating === 0) {
                         this.setState({
                             isValid: Object.keys(this.fields).reduce((result, next) => {
