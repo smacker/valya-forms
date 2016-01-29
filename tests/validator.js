@@ -46,14 +46,6 @@ test('should pass initialValidation from context to props', (t) => {
     t.end();
 });
 
-test('should pass silentInitValidation from context to props', (t) => {
-    makeValidator({silentInitValidation: true});
-
-    t.equal(output.props.silentInitValidation, true);
-
-    t.end();
-});
-
 test('should call onStart from context', (t) => {
     function callback() {
         t.pass('callback called');

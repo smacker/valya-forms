@@ -29,6 +29,6 @@
     "tape": "^4.4.0"
   },
   "dependencies": {
-    "valya": "^0.2.1"
+    "valya": "alpha"
   }
 }

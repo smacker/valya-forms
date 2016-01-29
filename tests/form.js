@@ -32,7 +32,6 @@ test('child context', (t) => {
     );
 
     t.equal(childContext.initialValidation, false);
-    t.equal(childContext.silentInitValidation, false);
 
     t.end();
 });
@@ -40,10 +39,7 @@ test('child context', (t) => {
 test('set child props', (t) => {
     makeForm();
 
-    const keys = [
-        'initialValidation', 'silentInitValidation',
-        'isValid', 'isValidating'
-    ];
+    const keys = [ 'initialValidation', 'isValid', 'isValidating' ];
 
     keys.forEach((key) => {
         t.true(key in output.props, `${key} is in props`);

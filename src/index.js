@@ -5,26 +5,24 @@ export const ValidatorWrapper = (Base) => {
         static contextTypes = {
             onStart: PropTypes.func,
             onEnd: PropTypes.func,
-            initialValidation: PropTypes.bool,
-            silentInitValidation: PropTypes.bool
+            initialValidation: PropTypes.bool
         };
 
-        _onStart = () => {
-            this.props.onStart && this.props.onStart();
-            this.context.onStart && this.context.onStart(this.props.name);
+        _onStart = (props) => {
+            this.props.onStart && this.props.onStart(props);
+            this.context.onStart && this.context.onStart(props);
         };
 
-        _onEnd = (isValid, message) => {
-            this.props.onEnd && this.props.onEnd(isValid, message);
-            this.context.onEnd && this.context.onEnd(isValid, message, this.props.name);
+        _onEnd = (props) => {
+            this.props.onEnd && this.props.onEnd(props);
+            this.context.onEnd && this.context.onEnd(props);
         };
 
         render() {
-            const { initialValidation, silentInitValidation } = this.context;
+            const { initialValidation } = this.context;
 
             return createElement(Base, {
                 initialValidation,
-                silentInitValidation,
                 ...this.props,
                 onStart: this._onStart,
                 onEnd: this._onEnd
@@ -36,8 +34,7 @@ export const ValidatorWrapper = (Base) => {
 export const FormWrapper = (Base) => {
     return class extends Component {
         static defaultProps = {
-            initialValidation: false,
-            silentInitValidation: false
+            initialValidation: false
         };
 
         constructor(props, context) {
@@ -55,20 +52,19 @@ export const FormWrapper = (Base) => {
         static childContextTypes = {
             onStart: PropTypes.func,
             onEnd: PropTypes.func,
-            initialValidation: PropTypes.bool,
-            silentInitValidation: PropTypes.bool
+            initialValidation: PropTypes.bool
         };
 
         getChildContext() {
-            const { initialValidation, silentInitValidation } = this.props;
+            const { initialValidation } = this.props;
 
             return {
-                onStart: (name) => {
+                onStart: ({ name }) => {
                     this.fieldsInValidating += 1;
                     this.fields[name] = false;
                     this.setState({ isValid: false, isValidating: true });
                 },
-                onEnd: (isValid, message, name) => {
+                onEnd: ({ isValid, name }) => {
                     this.fieldsInValidating -= 1;
                     this.fields[name] = isValid;
 
@@ -85,8 +81,7 @@ export const FormWrapper = (Base) => {
                         });
                     }
                 },
-                initialValidation,
-                silentInitValidation
+                initialValidation
             };
         }
 

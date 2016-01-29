@@ -3,7 +3,7 @@
 Valya Forms are just a tiny Higher-Order Components for [Valya](https://github.com/deepsweet/valya).
 
 It provides props `isValid` and `isValidating` for wrapped component according to states of validators.
-Also it allows set `initialValidation` and `silentInitValidation` in form for all validators of this form.
+Also it allows set `initialValidation` in form for all validators of this form.
 
 ### Example
 
@@ -70,8 +70,8 @@ class MyForm extends Component {
         let { isValid, isValidating } = this.props;
 
         return (
-            {/* props initialValidation and silentInitValidation will be passed to all validators */}
-            <form initialValidation={true} silentInitValidation={true}>
+            {/* prop initialValidation will be passed to all validators */}
+            <form initialValidation={true}>
                 {/* name & value props are required
                     they will be passed to valya and underlying component */}
                 <Validator name="email" value={this.state.email} validators={validators}>
