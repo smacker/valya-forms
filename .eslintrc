@@ -3,6 +3,7 @@ extends: "eslint:recommended"
 parser: babel-eslint
 plugins:
   - babel
+  - react
 
 env:
   es6: true
@@ -11,6 +12,7 @@ env:
 
 ecmaFeatures:
   modules: true
+  jsx: true
 
 rules:
   semi:
@@ -32,3 +34,16 @@ rules:
     - 2
     - 4
     - SwitchCase: 1
+
+  jsx-quotes:
+    - 2
+    - prefer-double
+
+  react/jsx-no-undef: 1
+  react/jsx-uses-react: 1
+  react/jsx-uses-vars: 1
+  react/no-did-mount-set-state: 1
+  react/no-did-update-set-state: 1
+  react/no-unknown-property: 1
+  react/react-in-jsx-scope: 1
+  react/self-closing-comp: 1

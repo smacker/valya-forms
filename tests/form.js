@@ -62,7 +62,7 @@ test('default state', (t) => {
 test('state change after onStart', (t) => {
     makeForm();
 
-    childContext.onStart(fieldName);
+    childContext.onStart({name: fieldName});
 
     t.deepEqual(instance.state, {
         isValid: false,
@@ -76,10 +76,9 @@ test('state change after valid onEnd', (t) => {
     makeForm();
 
     const isValid = true;
-    const message = null;
 
-    childContext.onStart(fieldName);
-    childContext.onEnd(isValid, message, fieldName);
+    childContext.onStart({name: fieldName});
+    childContext.onEnd({isValid, name: fieldName });
 
     t.deepEqual(instance.state, {
         isValid: true,
@@ -93,10 +92,9 @@ test('state change after not valid onEnd', (t) => {
     makeForm();
 
     const isValid = false;
-    const message = 'error';
 
-    childContext.onStart(fieldName);
-    childContext.onEnd(isValid, message, fieldName);
+    childContext.onStart({name: fieldName});
+    childContext.onEnd({isValid, name: fieldName});
 
     t.deepEqual(instance.state, {
         isValid: false,
@@ -110,9 +108,8 @@ test('should finish validation when onEnd called more times then onStart', (t) =
     makeForm();
 
     const isValid = true;
-    const message = null;
 
-    childContext.onEnd(isValid, message, fieldName);
+    childContext.onEnd({isValid, name: fieldName});
 
     t.deepEqual(instance.state, {
         isValid: true,
