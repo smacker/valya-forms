@@ -34,7 +34,8 @@ export const ValidatorWrapper = (Base) => {
 export const FormWrapper = (Base) => {
     return class extends Component {
         static defaultProps = {
-            initialValidation: false
+            initialValidation: false,
+            fieldKey: 'name'
         };
 
         constructor(props, context) {
@@ -56,17 +57,21 @@ export const FormWrapper = (Base) => {
         };
 
         getChildContext() {
-            const { initialValidation } = this.props;
+            const { initialValidation, fieldKey } = this.props;
 
             return {
-                onStart: ({ name }) => {
+                onStart: (props) => {
+                    const fieldKeyValue = props[fieldKey];
+
                     this.fieldsInValidating += 1;
-                    this.fields[name] = false;
+                    this.fields[fieldKeyValue] = false;
                     this.setState({ isValid: false, isValidating: true });
                 },
-                onEnd: ({ isValid, name }) => {
+                onEnd: (props) => {
+                    const fieldKeyValue = props[fieldKey];
+
                     this.fieldsInValidating -= 1;
-                    this.fields[name] = isValid;
+                    this.fields[fieldKeyValue] = props.isValid;
 
                     if (this.fieldsInValidating < 0) {
                         this.fieldsInValidating = 0;
