@@ -16,13 +16,13 @@ import Valya from 'valya';
 
 class Validator extends Component {
     renderError() {
-        const { enabled, isValid } = this.props;
+        const { shouldValidate, isValid } = this.props;
 
-        if (!enabled || isValid) {
+        if (!shouldValidate || isValid) {
             return null;
         }
 
-        return <div className="error">{this.props.validationErrorMessage}</div>;
+        return <div className="error">{this.props.validationMessage}</div>;
     }
 
     render() {
