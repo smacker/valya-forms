@@ -8,6 +8,10 @@
     "validation",
     "validator"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smacker/valya-forms.git"
+  },
   "homepage": "https://github.com/smacker/valya-forms",
   "scripts": {
     "build": "babel src/index.js > index.js",
